@@ -39,6 +39,7 @@ class Bot(Configurable):
         self.rune_active = False
         self.rune_pos = (0, 0)
         self.rune_closest_pos = (0, 0)      # Location of the Point closest to rune
+        self.submodules = []
         self.command_book = None            # CommandBook instance
         # self.module_name = None
         # self.buff = components.Buff()
