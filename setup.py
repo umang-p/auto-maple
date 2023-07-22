@@ -41,6 +41,14 @@ def create_desktop_shortcut():
     shortcut = shell.CreateShortCut(shortcut_path)
     shortcut.Targetpath = target
     shortcut.Arguments = flag + f' \"cd {cwd} & python main.py\"'
+
+    # windows and automaple can be on separate drives
+    # need to switch to the drive automaple is on before cd into automaple dir
+    # TODO: use pathlib instead of splitting to determine drive
+    if target.split(":")[0] != cwd.split(":")[0]:
+        automaple_drive = cwd.split(":")[0]
+        shortcut.Arguments = flag + f' \"{automaple_drive}: & cd {cwd} & python main.py\"'
+
     shortcut.IconLocation = os.path.join(cwd, 'assets', 'icon.ico')
     try:
         shortcut.save()
